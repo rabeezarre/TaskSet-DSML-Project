@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see fr.se301b.taskset.TasksetPackage#getTasksSet()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='uniqueTaskNames singleRootTaskSet'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='uniqueTaskNames'"
  * @generated
  */
 public interface TasksSet extends NamedElement {

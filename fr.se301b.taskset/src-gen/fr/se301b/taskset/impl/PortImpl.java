@@ -229,9 +229,9 @@ public class PortImpl extends NamedElementImpl implements Port {
 	public String getQualifiedName() {
 		if (eContainer() instanceof TaskImpl) {
 			TaskImpl parentTask = (TaskImpl) eContainer();
-			return parentTask.getQualifiedName() + "." + getName();
+			return parentTask.getQualifiedName() + "." + super.getName();
 		}
-		return getName();
+		return super.getName();
 	}
 
 } //PortImpl

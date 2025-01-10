@@ -1,0 +1,4 @@
+/first_rt_posix_app
+/main.o
+/threads_dispatch.o
+/threads_ports.o

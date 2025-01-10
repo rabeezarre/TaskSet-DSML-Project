@@ -35,8 +35,8 @@
     </genClasses>
     <genClasses ecoreClass="taskset.ecore#//Connection">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute taskset.ecore#//Connection/queueSize"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskset.ecore#//Connection/sourcePort"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskset.ecore#//Connection/destPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference taskset.ecore#//Connection/sourcePort"/>
     </genClasses>
     <genClasses ecoreClass="taskset.ecore#//TasksSet">
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference taskset.ecore#//TasksSet/tasks"/>

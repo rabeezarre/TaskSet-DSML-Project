@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link fr.se301b.taskset.impl.ConnectionImpl#getQueueSize <em>Queue Size</em>}</li>
- *   <li>{@link fr.se301b.taskset.impl.ConnectionImpl#getSourcePort <em>Source Port</em>}</li>
  *   <li>{@link fr.se301b.taskset.impl.ConnectionImpl#getDestPort <em>Dest Port</em>}</li>
+ *   <li>{@link fr.se301b.taskset.impl.ConnectionImpl#getSourcePort <em>Source Port</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,16 +50,6 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 	protected int queueSize = QUEUE_SIZE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSourcePort() <em>Source Port</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSourcePort()
-	 * @generated
-	 * @ordered
-	 */
-	protected Port sourcePort;
-
-	/**
 	 * The cached value of the '{@link #getDestPort() <em>Dest Port</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,6 +58,16 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 	 * @ordered
 	 */
 	protected Port destPort;
+
+	/**
+	 * The cached value of the '{@link #getSourcePort() <em>Source Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourcePort()
+	 * @generated
+	 * @ordered
+	 */
+	protected Port sourcePort;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -118,48 +118,6 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
-	public Port getSourcePort() {
-		if (sourcePort != null && sourcePort.eIsProxy()) {
-			InternalEObject oldSourcePort = (InternalEObject) sourcePort;
-			sourcePort = (Port) eResolveProxy(oldSourcePort);
-			if (sourcePort != oldSourcePort) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TasksetPackage.CONNECTION__SOURCE_PORT,
-							oldSourcePort, sourcePort));
-			}
-		}
-		return sourcePort;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Port basicGetSourcePort() {
-		return sourcePort;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSourcePort(Port newSourcePort) {
-		Port oldSourcePort = sourcePort;
-		sourcePort = newSourcePort;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TasksetPackage.CONNECTION__SOURCE_PORT, oldSourcePort,
-					sourcePort));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Port getDestPort() {
 		if (destPort != null && destPort.eIsProxy()) {
 			InternalEObject oldDestPort = (InternalEObject) destPort;
@@ -202,18 +160,60 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
+	public Port getSourcePort() {
+		if (sourcePort != null && sourcePort.eIsProxy()) {
+			InternalEObject oldSourcePort = (InternalEObject) sourcePort;
+			sourcePort = (Port) eResolveProxy(oldSourcePort);
+			if (sourcePort != oldSourcePort) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TasksetPackage.CONNECTION__SOURCE_PORT,
+							oldSourcePort, sourcePort));
+			}
+		}
+		return sourcePort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Port basicGetSourcePort() {
+		return sourcePort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSourcePort(Port newSourcePort) {
+		Port oldSourcePort = sourcePort;
+		sourcePort = newSourcePort;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TasksetPackage.CONNECTION__SOURCE_PORT, oldSourcePort,
+					sourcePort));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case TasksetPackage.CONNECTION__QUEUE_SIZE:
 			return getQueueSize();
-		case TasksetPackage.CONNECTION__SOURCE_PORT:
-			if (resolve)
-				return getSourcePort();
-			return basicGetSourcePort();
 		case TasksetPackage.CONNECTION__DEST_PORT:
 			if (resolve)
 				return getDestPort();
 			return basicGetDestPort();
+		case TasksetPackage.CONNECTION__SOURCE_PORT:
+			if (resolve)
+				return getSourcePort();
+			return basicGetSourcePort();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -229,11 +229,11 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 		case TasksetPackage.CONNECTION__QUEUE_SIZE:
 			setQueueSize((Integer) newValue);
 			return;
-		case TasksetPackage.CONNECTION__SOURCE_PORT:
-			setSourcePort((Port) newValue);
-			return;
 		case TasksetPackage.CONNECTION__DEST_PORT:
 			setDestPort((Port) newValue);
+			return;
+		case TasksetPackage.CONNECTION__SOURCE_PORT:
+			setSourcePort((Port) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -250,11 +250,11 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 		case TasksetPackage.CONNECTION__QUEUE_SIZE:
 			setQueueSize(QUEUE_SIZE_EDEFAULT);
 			return;
-		case TasksetPackage.CONNECTION__SOURCE_PORT:
-			setSourcePort((Port) null);
-			return;
 		case TasksetPackage.CONNECTION__DEST_PORT:
 			setDestPort((Port) null);
+			return;
+		case TasksetPackage.CONNECTION__SOURCE_PORT:
+			setSourcePort((Port) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -270,10 +270,10 @@ public class ConnectionImpl extends NamedElementImpl implements Connection {
 		switch (featureID) {
 		case TasksetPackage.CONNECTION__QUEUE_SIZE:
 			return queueSize != QUEUE_SIZE_EDEFAULT;
-		case TasksetPackage.CONNECTION__SOURCE_PORT:
-			return sourcePort != null;
 		case TasksetPackage.CONNECTION__DEST_PORT:
 			return destPort != null;
+		case TasksetPackage.CONNECTION__SOURCE_PORT:
+			return sourcePort != null;
 		}
 		return super.eIsSet(featureID);
 	}

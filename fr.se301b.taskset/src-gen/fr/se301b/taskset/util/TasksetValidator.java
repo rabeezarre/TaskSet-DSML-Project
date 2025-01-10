@@ -134,6 +134,8 @@ public class TasksetValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validate_EveryMapEntryUnique(task, diagnostics, context);
 		if (result || diagnostics != null)
+			result &= validateNamedElement_singleRootTaskSet(task, diagnostics, context);
+		if (result || diagnostics != null)
 			result &= validateTask_uniquePortNames(task, diagnostics, context);
 		if (result || diagnostics != null)
 			result &= validateTask_validPeriod(task, diagnostics, context);
@@ -186,7 +188,26 @@ public class TasksetValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePort(Port port, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(port, diagnostics, context);
+		if (!validate_NoCircularContainment(port, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(port, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateNamedElement_singleRootTaskSet(port, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -212,6 +233,8 @@ public class TasksetValidator extends EObjectValidator {
 			result &= validate_EveryKeyUnique(connection, diagnostics, context);
 		if (result || diagnostics != null)
 			result &= validate_EveryMapEntryUnique(connection, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateNamedElement_singleRootTaskSet(connection, diagnostics, context);
 		if (result || diagnostics != null)
 			result &= validateConnection_validPortTypes(connection, diagnostics, context);
 		if (result || diagnostics != null)
@@ -303,9 +326,9 @@ public class TasksetValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validate_EveryMapEntryUnique(tasksSet, diagnostics, context);
 		if (result || diagnostics != null)
-			result &= validateTasksSet_uniqueTaskNames(tasksSet, diagnostics, context);
+			result &= validateNamedElement_singleRootTaskSet(tasksSet, diagnostics, context);
 		if (result || diagnostics != null)
-			result &= validateTasksSet_singleRootTaskSet(tasksSet, diagnostics, context);
+			result &= validateTasksSet_uniqueTaskNames(tasksSet, diagnostics, context);
 		return result;
 	}
 
@@ -333,37 +356,56 @@ public class TasksetValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the singleRootTaskSet constraint of '<em>Tasks Set</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean validateTasksSet_singleRootTaskSet(TasksSet tasksSet, DiagnosticChain diagnostics,
-			Map<Object, Object> context) {
-		Resource resource = tasksSet.eResource();
-		if (resource != null) {
-			long taskSetCount = resource.getContents().stream().filter(e -> e instanceof TasksSet).count();
-			if (taskSetCount > 1) {
-				if (diagnostics != null) {
-					diagnostics.add(
-							createDiagnostic(Diagnostic.ERROR, DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
-									new Object[] { "singleRootTaskSet", getObjectLabel(tasksSet, context) },
-									new Object[] { tasksSet }, context));
-				}
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean validateNamedElement(NamedElement namedElement, DiagnosticChain diagnostics,
 			Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(namedElement, diagnostics, context);
+		if (!validate_NoCircularContainment(namedElement, diagnostics, context))
+			return false;
+		boolean result = validate_EveryMultiplicityConforms(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryDataValueConforms(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryReferenceIsContained(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryBidirectionalReferenceIsPaired(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryProxyResolves(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_UniqueID(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryKeyUnique(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validate_EveryMapEntryUnique(namedElement, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateNamedElement_singleRootTaskSet(namedElement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the singleRootTaskSet constraint of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateNamedElement_singleRootTaskSet(NamedElement namedElement, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		Resource resource = namedElement.eResource();
+		if (resource != null) {
+			long taskSetCount = resource.getContents().stream().filter(e -> e instanceof TasksSet).count();
+			if (taskSetCount > 1) {
+				if (diagnostics != null) {
+					diagnostics.add(
+							createDiagnostic(Diagnostic.ERROR, DIAGNOSTIC_SOURCE, 0, "_UI_GenericConstraint_diagnostic",
+									new Object[] { "singleRootTaskSet", getObjectLabel(namedElement, context) },
+									new Object[] { namedElement }, context));
+				}
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**

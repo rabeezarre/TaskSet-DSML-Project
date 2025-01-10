@@ -287,22 +287,22 @@ public interface TasksetPackage extends EPackage {
 	int CONNECTION__QUEUE_SIZE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source Port</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION__SOURCE_PORT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Dest Port</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION__DEST_PORT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int CONNECTION__DEST_PORT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Source Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION__SOURCE_PORT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Connection</em>' class.
@@ -524,17 +524,6 @@ public interface TasksetPackage extends EPackage {
 	EAttribute getConnection_QueueSize();
 
 	/**
-	 * Returns the meta object for the reference '{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Port</em>'.
-	 * @see fr.se301b.taskset.Connection#getSourcePort()
-	 * @see #getConnection()
-	 * @generated
-	 */
-	EReference getConnection_SourcePort();
-
-	/**
 	 * Returns the meta object for the reference '{@link fr.se301b.taskset.Connection#getDestPort <em>Dest Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -544,6 +533,17 @@ public interface TasksetPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConnection_DestPort();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source Port</em>'.
+	 * @see fr.se301b.taskset.Connection#getSourcePort()
+	 * @see #getConnection()
+	 * @generated
+	 */
+	EReference getConnection_SourcePort();
 
 	/**
 	 * Returns the meta object for class '{@link fr.se301b.taskset.TasksSet <em>Tasks Set</em>}'.
@@ -749,20 +749,20 @@ public interface TasksetPackage extends EPackage {
 		EAttribute CONNECTION__QUEUE_SIZE = eINSTANCE.getConnection_QueueSize();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Port</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONNECTION__SOURCE_PORT = eINSTANCE.getConnection_SourcePort();
-
-		/**
 		 * The meta object literal for the '<em><b>Dest Port</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CONNECTION__DEST_PORT = eINSTANCE.getConnection_DestPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Port</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONNECTION__SOURCE_PORT = eINSTANCE.getConnection_SourcePort();
 
 		/**
 		 * The meta object literal for the '{@link fr.se301b.taskset.impl.TasksSetImpl <em>Tasks Set</em>}' class.

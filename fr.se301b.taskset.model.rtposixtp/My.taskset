@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taskset:TasksSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:taskset="http://www.example.org/taskset" name="main">
+  <tasks name="T1" period="1000">
+    <ports name="po" direction="OUT"/>
+  </tasks>
+  <tasks name="T2" period="2000"/>
+  <tasks name="T3" kind="SPORADIC" minDelay="6000">
+    <ports name="pi"/>
+  </tasks>
+  <connections name="connection" destPort="T3.pi" sourcePort="T1.po"/>
+</taskset:TasksSet>

@@ -1,0 +1,130 @@
+[comment encoding = UTF-8 /]
+[module generateTasksCCode('http://www.example.org/taskset')]
+
+[template public generateTasksCCode(aTasksSet : TasksSet)]
+[comment @main/]
+[file (aTasksSet.name + '.c', false, 'UTF-8')]
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#define __USE_UNIX98
+#include <pthread.h>
+#include <sched.h>
+#include <errno.h>
+
+#include "threads_dispatch.h"
+#include "threads_ports.h"
+
+pthread_mutex_t start_barrier_mutex;
+pthread_cond_t start_barrier_cond;
+pthread_cond_t main_barrier_cond;
+
+char reached_barrier = 0;
+
+#define NB_THREADS [aTasksSet.tasks->size()/]
+
+[for (task : Task | aTasksSet.tasks)]
+void [task.name/]_body();
+
+// Initialization of data for task [task.name/] ([if (task.kind = DispatchKind::PERIODIC)]periodic, period = [task.period/][else]sporadic, minimum delay = [task.minDelay/][/if] ms)
+[if (task.kind = DispatchKind::PERIODIC)]
+thread_config_t [task.name/]_info = { [task.period/], 0 };
+[else]
+[for (port : Port | task.ports->select(p | p.direction = PortDirection::IN))]
+char [task.name/]_q_[port.name/]_content['['/]5[']'/] = { 0, 0, 0, 0, 0 };
+
+port_queue_t [task.name/]_q_[port.name/] = { 5, -1, -1, 0, sizeof(char), [task.name/]_q_[port.name/]_content };
+[/for]
+
+pthread_mutex_t [task.name/]_q_rez;
+pthread_cond_t [task.name/]_q_event;
+sporadic_thread_config_t [task.name/]_info;
+thread_queue_t [task.name/]_q = { &[task.name/]_q_rez, &[task.name/]_q_event, (union thread_config*) &[task.name/]_info,
+        0, 0, 
+{ 
+ &[task.name/]_q_[task.ports->select(p | p.direction = PortDirection::IN)->first().name/]} };
+
+struct timespec [task.name/]_timespec;
+sporadic_thread_config_t [task.name/]_info = { [task.minDelay/], &[task.name/]_timespec, &[task.name/]_q, 0 };
+[/if]
+[/for]
+
+int main(int argc, char *argv['['/][']'/]) {
+    int max_prio = sched_get_priority_max(SCHED_FIFO);
+    int min_prio = sched_get_priority_min(SCHED_FIFO);
+    pthread_t thId = pthread_self();
+
+    struct sched_param sched_param_own;
+    sched_param_own.sched_priority = min_prio;
+    pthread_setschedparam(thId, SCHED_FIFO, &sched_param_own);
+
+    pthread_mutex_init(&start_barrier_mutex, NULL);
+    pthread_cond_init(&start_barrier_cond, NULL);
+    pthread_cond_init(&main_barrier_cond, NULL);
+
+    [for (task : Task | aTasksSet.tasks)]
+    init_[if (task.kind = DispatchKind::PERIODIC)]periodic[else]sporadic[/if]_config([if (task.kind = DispatchKind::SPORADIC)](thread_config_t*) [/if]&[task.name/]_info);
+    pthread_t [task.name/]_tid;
+    create_fp_thread(min_prio + [aTasksSet.tasks->indexOf(task) + 4/], 64*1024, (void*) [task.name/]_body, &[task.name/]_tid, SCHED_FIFO);
+    [/for]
+
+    pthread_mutex_lock(&start_barrier_mutex);
+    while (reached_barrier < NB_THREADS) {
+        pthread_cond_wait(&main_barrier_cond, &start_barrier_mutex);
+    }
+    pthread_mutex_unlock(&start_barrier_mutex);
+
+    set_start_time();
+    pthread_cond_broadcast(&start_barrier_cond);
+
+    [for (task : Task | aTasksSet.tasks)]
+    pthread_join([task.name/]_tid, NULL);
+    [/for]
+}
+
+[for (task : Task | aTasksSet.tasks)]
+void [task.name/]_body() {
+    pthread_mutex_lock(&start_barrier_mutex);
+    reached_barrier++;
+    pthread_cond_signal(&main_barrier_cond);
+    pthread_cond_wait(&start_barrier_cond, &start_barrier_mutex);
+    pthread_mutex_unlock(&start_barrier_mutex);
+
+    while (1) {
+        [if (task.kind = DispatchKind::PERIODIC)]
+        display_relative_date("Start thread [task.name/]",
+            ([task.name/]_info.periodic_config).iteration_counter);
+        [/if]
+        
+        [if (task.kind = DispatchKind::SPORADIC)]
+        StatusType status = await_sporadic_dispatch([task.name/]_info.global_q);
+        ReceiveInputs_runtime([task.name/]_info.global_q, 0);
+        char [task.ports->select(p | p.direction = PortDirection::IN)->first().name/];
+        GetValue_runtime([task.name/]_info.global_q, 0, &[task.ports->select(p | p.direction = PortDirection::IN)->first().name/]);
+        [/if]
+
+        // Thread behavior
+        [if (task.ports->exists(p | p.direction = PortDirection::OUT))]
+        char PO = 'c';
+        [/if]
+        simulate_exec_time([if (task.kind = DispatchKind::PERIODIC)]400000000[else]2000000000[/if]); // [if (task.kind = DispatchKind::PERIODIC)]400[else]200[/if] ms
+
+        printf("Finish thread [task.name/]\n");
+
+        [if (task.ports->exists(p | p.direction = PortDirection::OUT))]
+        [for (conn : Connection | aTasksSet.connections)]
+        [if (conn.sourcePort.eContainer().oclAsType(Task) = task)]
+        SendOutput_runtime(&[conn.destPort.eContainer().oclAsType(Task).name/]_q, 0, &PO);
+        [/if]
+        [/for]
+        [/if]
+
+        [if (task.kind = DispatchKind::PERIODIC)]
+        await_periodic_dispatch(&[task.name/]_info);
+        [/if]
+    }
+}
+[/for]
+
+[/file]
+[/template]

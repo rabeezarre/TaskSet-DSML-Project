@@ -268,7 +268,7 @@ public class TasksetPackageImpl extends EPackageImpl implements TasksetPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getConnection_SourcePort() {
+	public EReference getConnection_DestPort() {
 		return (EReference) connectionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -278,7 +278,7 @@ public class TasksetPackageImpl extends EPackageImpl implements TasksetPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getConnection_DestPort() {
+	public EReference getConnection_SourcePort() {
 		return (EReference) connectionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -414,8 +414,8 @@ public class TasksetPackageImpl extends EPackageImpl implements TasksetPackage {
 
 		connectionEClass = createEClass(CONNECTION);
 		createEAttribute(connectionEClass, CONNECTION__QUEUE_SIZE);
-		createEReference(connectionEClass, CONNECTION__SOURCE_PORT);
 		createEReference(connectionEClass, CONNECTION__DEST_PORT);
+		createEReference(connectionEClass, CONNECTION__SOURCE_PORT);
 
 		tasksSetEClass = createEClass(TASKS_SET);
 		createEReference(tasksSetEClass, TASKS_SET__TASKS);
@@ -491,10 +491,10 @@ public class TasksetPackageImpl extends EPackageImpl implements TasksetPackage {
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConnection_QueueSize(), ecorePackage.getEInt(), "queueSize", "10", 1, 1, Connection.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConnection_SourcePort(), this.getPort(), null, "sourcePort", null, 1, 1, Connection.class,
+		initEReference(getConnection_DestPort(), this.getPort(), null, "destPort", null, 1, 1, Connection.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConnection_DestPort(), this.getPort(), null, "destPort", null, 1, 1, Connection.class,
+		initEReference(getConnection_SourcePort(), this.getPort(), null, "sourcePort", null, 1, 1, Connection.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -547,7 +547,8 @@ public class TasksetPackageImpl extends EPackageImpl implements TasksetPackage {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation(taskEClass, source, new String[] { "constraints", "uniquePortNames validPeriod" });
 		addAnnotation(connectionEClass, source, new String[] { "constraints", "validPortTypes validQueueSize" });
-		addAnnotation(tasksSetEClass, source, new String[] { "constraints", "uniqueTaskNames singleRootTaskSet" });
+		addAnnotation(tasksSetEClass, source, new String[] { "constraints", "uniqueTaskNames" });
+		addAnnotation(namedElementEClass, source, new String[] { "constraints", "singleRootTaskSet" });
 	}
 
 } //TasksetPackageImpl

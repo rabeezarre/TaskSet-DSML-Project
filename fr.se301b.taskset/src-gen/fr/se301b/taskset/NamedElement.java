@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see fr.se301b.taskset.TasksetPackage#getNamedElement()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='singleRootTaskSet'"
  * @generated
  */
 public interface NamedElement extends EObject {

@@ -12,8 +12,8 @@ package fr.se301b.taskset;
  * </p>
  * <ul>
  *   <li>{@link fr.se301b.taskset.Connection#getQueueSize <em>Queue Size</em>}</li>
- *   <li>{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}</li>
  *   <li>{@link fr.se301b.taskset.Connection#getDestPort <em>Dest Port</em>}</li>
+ *   <li>{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}</li>
  * </ul>
  *
  * @see fr.se301b.taskset.TasksetPackage#getConnection()
@@ -45,28 +45,6 @@ public interface Connection extends NamedElement {
 	void setQueueSize(int value);
 
 	/**
-	 * Returns the value of the '<em><b>Source Port</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Port</em>' reference.
-	 * @see #setSourcePort(Port)
-	 * @see fr.se301b.taskset.TasksetPackage#getConnection_SourcePort()
-	 * @model required="true"
-	 * @generated
-	 */
-	Port getSourcePort();
-
-	/**
-	 * Sets the value of the '{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Port</em>' reference.
-	 * @see #getSourcePort()
-	 * @generated
-	 */
-	void setSourcePort(Port value);
-
-	/**
 	 * Returns the value of the '<em><b>Dest Port</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,5 +65,27 @@ public interface Connection extends NamedElement {
 	 * @generated
 	 */
 	void setDestPort(Port value);
+
+	/**
+	 * Returns the value of the '<em><b>Source Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Port</em>' reference.
+	 * @see #setSourcePort(Port)
+	 * @see fr.se301b.taskset.TasksetPackage#getConnection_SourcePort()
+	 * @model required="true"
+	 * @generated
+	 */
+	Port getSourcePort();
+
+	/**
+	 * Sets the value of the '{@link fr.se301b.taskset.Connection#getSourcePort <em>Source Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Port</em>' reference.
+	 * @see #getSourcePort()
+	 * @generated
+	 */
+	void setSourcePort(Port value);
 
 } // Connection

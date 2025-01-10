@@ -5,7 +5,7 @@
     <semanticResources>taskset.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_nR9GcLL8Ee-KQc1hoa5hNA">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_nWH0wLL8Ee-KQc1hoa5hNA" name="taskset" repPath="#_nTXbsLL8Ee-KQc1hoa5hNA" changeId="1736497659655">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_nWH0wLL8Ee-KQc1hoa5hNA" name="taskset" repPath="#_nTXbsLL8Ee-KQc1hoa5hNA" changeId="1736526803490">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="taskset.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -488,9 +488,9 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_zolfvL3jEe-2bYyYivGhbQ" name="[1..1] sourcePort" sourceNode="_7dfysLL8Ee-KQc1hoa5hNA" targetNode="_5MPhwLL8Ee-KQc1hoa5hNA">
-      <target xmi:type="ecore:EReference" href="taskset.ecore#//Connection/sourcePort"/>
-      <semanticElements xmi:type="ecore:EReference" href="taskset.ecore#//Connection/sourcePort"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_zolfvL3jEe-2bYyYivGhbQ" name="[1..1] destPort" sourceNode="_7dfysLL8Ee-KQc1hoa5hNA" targetNode="_5MPhwLL8Ee-KQc1hoa5hNA">
+      <target xmi:type="ecore:EReference" href="taskset.ecore#//Connection/destPort"/>
+      <semanticElements xmi:type="ecore:EReference" href="taskset.ecore#//Connection/destPort"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_-UgP1r3jEe-2bYyYivGhbQ" description="_9NhZpr3jEe-2bYyYivGhbQ" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_-UgP2L3jEe-2bYyYivGhbQ" showIcon="false">
           <labelFormat>bold</labelFormat>
@@ -499,9 +499,9 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_68Gwpr3jEe-2bYyYivGhbQ" name="[1..1] destPort" sourceNode="_7dfysLL8Ee-KQc1hoa5hNA" targetNode="_5MPhwLL8Ee-KQc1hoa5hNA">
-      <target xmi:type="ecore:EReference" href="taskset.ecore#//Connection/destPort"/>
-      <semanticElements xmi:type="ecore:EReference" href="taskset.ecore#//Connection/destPort"/>
+    <ownedDiagramElements xmi:type="diagram:DEdge" uid="_68Gwpr3jEe-2bYyYivGhbQ" name="[1..1] sourcePort" sourceNode="_7dfysLL8Ee-KQc1hoa5hNA" targetNode="_5MPhwLL8Ee-KQc1hoa5hNA">
+      <target xmi:type="ecore:EReference" href="taskset.ecore#//Connection/sourcePort"/>
+      <semanticElements xmi:type="ecore:EReference" href="taskset.ecore#//Connection/sourcePort"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" uid="_9NiAsL3jEe-2bYyYivGhbQ" description="_9NhZpr3jEe-2bYyYivGhbQ" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" uid="_9NiAsr3jEe-2bYyYivGhbQ" showIcon="false">
           <labelFormat>bold</labelFormat>
