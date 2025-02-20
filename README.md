@@ -1,35 +1,49 @@
 # TaskSet DSML - Simulating Communicating Tasks
 
 ## Overview
-This project is about simulating and generating C code for a set of communicating tasks in a real-time system. Instead of manually writing complex C code for task scheduling and communication, we use a modeling approach that makes it easier to design and test task-based applications.
+This project simulates and generates C code for real-time communicating tasks. It simplifies task scheduling and message passing using a model-driven approach.
 
-## What This Project Simulates
-- A set of tasks that run either periodically (at fixed time intervals) or sporadically (with random delays).
-- Tasks communicate with each other using input and output ports.
-- Messages are passed between tasks using queues.
-- The system runs using Rate Monotonic Scheduling (RMS), a fixed-priority scheduling method used in real-time systems.
-- The final C code generated can be compiled and run on a system that supports RT-POSIX threading.
+## Simulation Features
+- Tasks run **periodically** (fixed intervals) or **sporadically** (random delays).
+- Communication through **input/output ports** and **FIFO queues**.
+- Uses **Rate Monotonic Scheduling (RMS)**.
+- Generates **RT-POSIX-compliant C code**.
+
+## Project Creation
+1. **Metamodel Development**
+   - Built using **Ecore (Eclipse Modeling Framework)**.
+   - Defines **tasks, ports, connections, and scheduling policies**.
+2. **Validation Rules**
+   - Unique task names: each task must have a distinct name.
+   - Valid port connections: ports must match in data type and have correct input/output directions.
+   - FIFO queue size limits: connections must define a max queue size for message passing.
+   - Connection validity: no multiple inputs from different sources to the same input port.
+   - and more...
+3. **Code Generation**
+   - Uses **Acceleo** for model-to-text transformation.
+   - Produces **C functions for tasks, message passing, and synchronization**.
+4. **Compilation & Execution**
+   - Uses **Eclipse CDT** for C compilation.
+   - Runs on **Linux with RT-POSIX threading**.
 
 ## Repository Structure
-- **fr.se301b.taskset.c.rtposixtp** → Contains generated C code that simulates task execution.
-- **fr.se301b.taskset.generator.c** → The code generator that converts task models into C code.
-- **fr.se301b.taskset.model.rtposixtp** → Task set models describing task behaviors and communication.
-- **fr.se301b.taskset** → The core definitions of tasks, ports, and connections.
+- **fr.se301b.taskset.c.rtposixtp** → Generated C code.
+- **fr.se301b.taskset.generator.c** → Acceleo code generator.
+- **fr.se301b.taskset.model.rtposixtp** → Task models.
+- **fr.se301b.taskset** → Core definitions.
 
 ## How It Works
-1. **Create a Task Model**: Define tasks, their types (periodic/sporadic), and their communication links.
-2. **Validate the Model**: Ensure that task names are unique and connections are correctly set up.
-3. **Generate C Code**: Use Acceleo to automatically generate C code based on the task model.
-4. **Compile and Run**: Build the generated C program and execute it to simulate real-time task execution.
+1. **Create a Task Model** (define tasks, timing, connections).
+2. **Validate** (check constraints and scheduling rules).
+3. **Generate C Code** (automatic model-to-text conversion).
+4. **Compile & Run** (test the generated task set in RT-POSIX).
 
 ## Why Use This?
-- Simplifies writing complex real-time multi-threaded applications.
-- Reduces errors by automating code generation.
-- Allows easy modifications without rewriting the entire program.
-- Helps understand how real-time task scheduling and communication work.
+- Automates **error-prone** multi-threaded programming.
+- Makes **modifications easy** without rewriting C code.
 
 ## Requirements
-- Eclipse with Modeling Tools
-- Acceleo (for code generation)
-- Eclipse CDT (for compiling and running the C code)
-- Linux with RT-POSIX support (for actual execution)
+- **Eclipse Modeling Tools**
+- **Acceleo** (for code generation)
+- **Eclipse CDT** (for compiling C code)
+- **Linux with RT-POSIX support**
