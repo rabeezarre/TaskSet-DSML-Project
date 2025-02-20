@@ -1,5 +1,4 @@
-# TaskSet DSML
-## Simulating communicating tasks
+# TaskSet DSML (simulating communicating tasks)
 
 ## Overview
 This project simulates and generates C code for real-time communicating tasks. It simplifies task scheduling and message passing using a model-driven approach.
